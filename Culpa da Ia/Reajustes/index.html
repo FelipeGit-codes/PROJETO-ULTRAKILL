@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ULTRAKILL - Terminal Cybergrind V3</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="crt-overlay" aria-hidden="true"></div>
+    <div class="flash-overlay" id="flash-screen" aria-hidden="true"></div>
+
+    <canvas id="gameCanvas"></canvas>
+
+    <div id="style-meter" aria-live="polite">
+        <div id="rank-text" class="glitch" data-text="D">D</div>
+        <div id="style-pts">000000 PTS</div>
+        <div id="decay-warning" class="hidden">COMBO CAINDO!</div>
+    </div>
+
+    <main id="main-menu" class="menu-container">
+        <h1 class="game-title" data-text="ULTRAKILL">ULTRAKILL</h1>
+        <p class="subtitle">MANKIND IS DEAD. BLOOD IS FUEL. HELL IS FULL.</p>
+        
+        <nav class="menu-options">
+            <button data-action="open-tab" data-target="lore"><span class="arrow" aria-hidden="true">></span> LORE / TERMINAL</button>
+            <button data-action="open-tab" data-target="armas"><span class="arrow" aria-hidden="true">></span> ARSENAL COMPLETO</button>
+            <button data-action="open-tab" data-target="bestiario"><span class="arrow" aria-hidden="true">></span> DATA-BESTIÁRIO</button>
+            <button id="btn-spawn-coin" class="btn-highlight"><span class="arrow" aria-hidden="true">></span> JOGAR MOEDA <kbd>[F]</kbd></button>
+            <button id="btn-auto-coin" class="btn-auto-disabled"><span class="arrow" aria-hidden="true">></span> CHUVA AUTO: DESATIVADA</button>
+        </nav>
+    </main>
+
+    <section id="sec-lore" class="menu-container content-section hidden">
+        <h2 class="section-title">TERMINAL DATA // LORE</h2>
+        <div class="submenu flex-wrap">
+            <button data-lore="v1">PROJETO V1</button>
+            <button data-lore="humanidade">A QUEDA</button>
+            <button data-lore="inferno">O INFERNO</button>
+        </div>
+        <div id="lore-text" class="display-box">Aguardando input de dados...</div>
+        <button class="btn-back">[ RETORNAR AO MENU ]</button>
+    </section>
+
+    <section id="sec-armas" class="menu-container content-section hidden">
+        <h2 class="section-title">ARSENAL E ARMARENTO</h2>
+        <div class="submenu flex-wrap">
+            <button data-weapon-info="piercer">REVOLVER</button>
+            <button data-weapon-info="core">SHOTGUN</button>
+            <button data-weapon-info="nailgun">NAILGUN</button>
+            <button data-weapon-info="rpg">ROCKET LAUNCHER</button>
+            <button data-weapon-info="saw">SAWBLADE LAUNCHER</button>
+        </div>
+        <div id="weapon-text" class="display-box">Selecione armamento para diagnóstico...</div>
+        <button class="btn-back">[ RETORNAR AO MENU ]</button>
+    </section>
+
+    <section id="sec-bestiario" class="menu-container content-section hidden">
+        <h2 class="section-title">AMEAÇAS E DEUSES PRIMES</h2>
+        <div class="submenu flex-wrap">
+            <button data-beast="filth">FILTH</button>
+            <button data-beast="v2">V2</button>
+            <button data-beast="gabriel">GABRIEL</button>
+            <button data-beast="eyes">EYES (OLHOS)</button>
+        </div>
+        <div id="beast-text" class="display-box">Selecione entidade para escaneamento bio-mecânico...</div>
+        <button class="btn-back">[ RETORNAR AO MENU ]</button>
+    </section>
+
+    <aside id="weapon-select-hud" aria-label="Seleção de Armas">
+        <div class="hud-header">SISTEMA DE ARMAS ACTV</div>
+        <nav class="hud-weapons">
+            <button class="hud-btn active" data-weapon="revolver">1. PIERCER REVOLVER</button>
+            <button class="hud-btn" data-weapon="shotgun">2. CORE EJECT SHOTGUN</button>
+            <button class="hud-btn" data-weapon="nailgun">3. ATTRACTOR NAILGUN</button>
+            <button class="hud-btn" data-weapon="rpg">4. FREEZEFRAME BAZOOKA</button>
+            <button class="hud-btn" data-weapon="saw">5. SAWBLADE LAUNCHER</button>
+        </nav>
+    </aside>
+
+    <script src="script.js"></script>
+</body>
+</html>

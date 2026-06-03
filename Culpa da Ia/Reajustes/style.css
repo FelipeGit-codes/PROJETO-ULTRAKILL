@@ -1,0 +1,303 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@700;900&family=Share+Tech+Mono&display=swap');
+
+/* --- VARIÁVEIS DE SISTEMA (PALETA ULTRAKILL) --- */
+:root {
+    --bg-dark: #020202;
+    --bg-menu: rgba(3, 3, 5, 0.9);
+    --neon-red: #ff003c;
+    --neon-cyan: #00ffff;
+    --neon-gold: #ffb700;
+    --neon-green: #00ff66;
+    --text-muted: #ccc;
+    --text-dark: #050505;
+    --font-mono: 'Share Tech Mono', monospace;
+    --font-display: 'Oswald', sans-serif;
+}
+
+/* --- RESET & ESTRUTURA GLOBAL --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    user-select: none;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: #fff;
+    font-family: var(--font-mono);
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+}
+
+/* --- OVERLAYS VISUAIS (CRT & FLASH) --- */
+.crt-overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: 
+        linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
+        linear-gradient(90deg, rgba(255, 0, 0, 0.05), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.05));
+    background-size: 100% 4px, 6px 100%;
+    z-index: 999;
+    pointer-events: none;
+}
+
+.flash-overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: #fff;
+    opacity: 0;
+    z-index: 998;
+    pointer-events: none;
+    transition: opacity 0.045s ease-out; /* Sincronizado com o timeout do JS */
+}
+
+#gameCanvas {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: 1;
+}
+
+/* --- CONTÊINERES DE INTERFACE --- */
+.menu-container {
+    position: absolute;
+    top: 50%; left: 6%;
+    transform: translateY(-50%);
+    z-index: 10;
+    width: 100%;
+    max-width: 520px;
+    background: var(--bg-menu);
+    border: 2px solid var(--neon-red);
+    padding: 35px;
+    box-shadow: inset 0 0 20px rgba(255, 0, 60, 0.2), 0 0 30px rgba(0, 0, 0, 0.8);
+}
+
+.content-section { 
+    max-width: 650px; 
+}
+
+.hidden { 
+    display: none !important; 
+}
+
+/* --- TIPOGRAFIA --- */
+.game-title {
+    font-family: var(--font-display);
+    font-size: 5rem;
+    font-weight: 900;
+    color: var(--neon-red);
+    text-shadow: 3px 3px 0px var(--neon-cyan);
+    letter-spacing: 4px;
+    animation: titleShake 2s infinite;
+}
+
+.subtitle {
+    font-size: 0.85rem;
+    color: var(--neon-gold);
+    margin-bottom: 35px;
+    letter-spacing: 1.5px;
+    border-bottom: 1px solid rgba(255, 183, 0, 0.3);
+    padding-bottom: 10px;
+}
+
+.section-title {
+    font-family: var(--font-display);
+    color: var(--neon-red);
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+}
+
+/* --- BOTÕES GLOBAIS E ESTADOS --- */
+button {
+    display: block;
+    width: 100%;
+    background: #09090b;
+    color: var(--neon-cyan);
+    border: 1px solid var(--neon-cyan);
+    padding: 12px;
+    margin: 6px 0;
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    text-align: left;
+    transition: transform 0.1s ease-out, background 0.1s ease-out, box-shadow 0.1s ease-out;
+}
+
+button:hover {
+    background: var(--neon-cyan);
+    color: #000;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
+    transform: translateX(6px);
+}
+
+/* Variantes de Botões */
+.btn-highlight { 
+    color: var(--neon-gold); 
+    border-color: var(--neon-gold); 
+}
+.btn-highlight:hover { 
+    background: var(--neon-gold); 
+    color: #000; 
+    box-shadow: 0 0 20px rgba(255, 183, 0, 0.6); 
+}
+
+.btn-back { 
+    color: var(--neon-red); 
+    border-color: var(--neon-red); 
+    text-align: center; 
+    margin-top: 20px; 
+}
+.btn-back:hover { 
+    background: var(--neon-red); 
+    color: #fff; 
+    box-shadow: 0 0 20px var(--neon-red); 
+}
+
+/* Classes injetadas via JS para a Chuva Auto de Moedas */
+.btn-auto-disabled {
+    color: var(--neon-green);
+    border-color: var(--neon-green);
+}
+.btn-auto-disabled:hover {
+    background: var(--neon-green);
+    color: #000;
+    box-shadow: 0 0 20px var(--neon-green);
+}
+
+.btn-auto-enabled {
+    color: var(--neon-gold);
+    border-color: var(--neon-gold);
+}
+.btn-auto-enabled:hover {
+    background: var(--neon-gold);
+    color: #000;
+    box-shadow: 0 0 20px var(--neon-gold);
+}
+
+/* --- ELEMENTOS DE TEXTO E SUBMENUS --- */
+.submenu { 
+    display: flex; 
+    flex-wrap: wrap;
+    gap: 6px; 
+    margin: 15px 0; 
+}
+
+.submenu button { 
+    font-size: 0.8rem; 
+    text-align: center; 
+    padding: 8px 4px; 
+    flex: 1 1 calc(33.33% - 6px); /* Distribuição dinâmica perfeita */
+    min-width: 100px; 
+}
+
+.display-box {
+    background: #000;
+    border-left: 4px solid var(--neon-gold);
+    border-top: 1px solid #222;
+    border-right: 1px solid #222;
+    border-bottom: 1px solid #222;
+    padding: 20px;
+    min-height: 150px;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: var(--text-muted);
+}
+
+/* --- HUD: MEDIDOR DE ESTILO --- */
+#style-meter {
+    position: absolute;
+    top: 40px; right: 50px;
+    z-index: 10;
+    text-align: right;
+}
+
+#rank-text {
+    font-family: var(--font-display);
+    font-size: 6.5rem;
+    font-weight: 900;
+    color: var(--neon-cyan);
+    line-height: 0.9;
+    text-shadow: 4px 4px 0px rgba(0,0,0,0.8);
+    transition: color 0.2s ease; /* Transição suave ao mudar o Rank */
+}
+
+#style-pts { 
+    font-size: 1.4rem; 
+    color: var(--neon-gold); 
+    font-weight: bold; 
+    letter-spacing: 2px; 
+}
+
+#decay-warning {
+    color: var(--neon-red);
+    font-size: 0.9rem;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    margin-top: 5px;
+    display: none;
+    animation: pulse 0.5s infinite alternate;
+}
+
+/* --- HUD: SELEÇÃO DE ARMAS --- */
+#weapon-select-hud {
+    position: absolute;
+    bottom: 40px; right: 50px;
+    z-index: 10;
+    background: rgba(5, 5, 5, 0.95);
+    border: 2px solid var(--neon-gold);
+    padding: 12px;
+    width: 290px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.9);
+}
+
+.hud-header {
+    font-size: 0.75rem;
+    color: var(--neon-gold);
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+    border-bottom: 1px solid rgba(255, 183, 0, 0.3);
+    padding-bottom: 4px;
+}
+
+.hud-weapons { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 6px; 
+}
+
+.hud-weapons .hud-btn {
+    font-size: 0.85rem;
+    padding: 8px; margin: 0;
+    border-color: #222; 
+    color: #555;
+    background: var(--text-dark);
+}
+
+.hud-weapons .hud-btn.active {
+    color: #000; 
+    background: var(--neon-gold); 
+    border-color: var(--neon-gold);
+    box-shadow: 0 0 15px rgba(255, 183, 0, 0.4);
+}
+
+/* --- ANIMAÇÕES --- */
+@keyframes titleShake {
+    0%, 100% { transform: skew(0deg); }
+    2% { transform: skew(2deg); }
+    4% { transform: skew(-1deg); }
+    5% { transform: skew(0deg); }
+}
+
+@keyframes pulse {
+    0% { opacity: 0.3; }
+    100% { opacity: 1; }
+}
+
+/* --- RESPONSIVIDADE BÁSICA --- */
+@media (max-width: 1024px) {
+    .menu-container { left: 2%; max-width: 460px; padding: 20px; }
+    #rank-text { font-size: 5rem; }
+    #style-meter, #weapon-select-hud { right: 20px; }
+}

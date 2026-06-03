@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ULTRAKILL // APOCRYPHAL TERMINAL</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="crt-overlay"></div>
+    <div id="flash-screen"></div>
+
+    <div id="terminal-container">
+        
+        <div id="main-menu" class="terminal-window">
+            <div class="terminal-header">MANKIND IS DEAD. BLOOD IS FUEL. HELL IS FULL.</div>
+            <div class="terminal-subheader">CYBERGRIND CONSOLE v3.5.0 // ARCHITECTURE: PSEUDO-3D VECTOR</div>
+            
+            <div class="menu-grid">
+                <button class="menu-btn" data-action="open-tab" data-target="cybergrind">
+                    <span class="glitch-text">// PROTOCOL: ENTER CYBERGRIND ARENA</span>
+                </button>
+                <button class="menu-btn" data-action="open-tab" data-target="lore">
+                    <span>// DATA-LOG: PRIME SOUL INDEX</span>
+                </button>
+            </div>
+        </div>
+
+        <div id="sec-cybergrind" class="game-section hidden">
+            <div id="player-hud">
+                <div class="hud-left">
+                    <div class="hp-container">
+                        <div class="hud-label">V1 PLATES INTEGRITY</div>
+                        <div class="hp-bar-bg">
+                            <div id="hp-bar-hard"></div>
+                            <div id="hp-bar-fill"></div>
+                        </div>
+                        <div class="hp-numeric">
+                            <span id="hp-text">100</span><span class="hp-max">/100</span>
+                        </div>
+                    </div>
+                    <div class="lives-container">
+                        <div class="hud-label">CORE BACKUPS</div>
+                        <div id="lives-display">███</div>
+                    </div>
+                </div>
+
+                <div id="boss-hud" class="hidden">
+                    <div class="boss-title">MINOS PRIME</div>
+                    <div class="boss-bar-bg">
+                        <div id="boss-bar-fill"></div>
+                    </div>
+                    <div id="boss-subtitle">"DIE!"</div>
+                </div>
+
+                <div class="hud-right">
+                    <div id="rank-container">
+                        <div id="rank-text">D</div>
+                        <div id="style-pts">000000 PTS</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="arena-controls">
+                <button id="btn-spawn-coin" class="hud-action-btn">SPLIT COIN [F]</button>
+                <button id="btn-summon-minos" class="hud-action-btn boss-btn">MANIFEST MINOS [P]</button>
+                <button class="btn-back">// TERMINATE</button>
+            </div>
+
+            <div id="weapon-select-hud">
+                <button class="hud-btn active" data-weapon="revolver">[1] MARKSMAN</button>
+                <button class="hud-btn" data-weapon="shotgun">[2] CORE EJECT</button>
+                <button class="hud-btn" data-weapon="nailgun">[3] ATTRACTOR</button>
+                <button class="hud-btn" data-weapon="rpg">[4] FREEZEFRAME</button>
+                <button class="hud-btn" data-weapon="saw">[5] SAWBLADE</button>
+            </div>
+
+            <canvas id="gameCanvas"></canvas>
+        </div>
+
+        <div id="sec-lore" class="content-section hidden">
+            <div class="terminal-header">// ENCRYPTED QUANTUM CORES</div>
+            <div class="content-body">
+                <div class="sidebar-buttons">
+                    <button class="data-btn" data-lore="minos">MINOS PRIME</button>
+                    <button class="data-btn" data-lore="judgement">JUDGEMENT FIELD</button>
+                </div>
+                <div class="display-box"><p id="lore-text">Aguardando descriptografia de dados...</p></div>
+            </div>
+            <button class="btn-back"><- ACCESS RESET</button>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
